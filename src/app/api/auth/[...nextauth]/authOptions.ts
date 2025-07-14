@@ -22,19 +22,25 @@ export const authOptions: AuthOptions = {
           where: { email: credentials.email },
         })
 
-        if (user) {
-          const isValid = await compare(credentials.password, user.password)
-          if (isValid) return user
-        }
+        if (!user) return null
 
-        return null
+        const isValid = await compare(credentials.password, user.password)
+        if (!isValid) return null
+
+        // ✅ Exclude password before returning the user
+        const { password, ...userWithoutPassword } = user
+        return userWithoutPassword
       },
     }),
   ],
   callbacks: {
-    async session({ session, user }: { session: Session; user: AdapterUser }) {
-      if (session.user) {
-        ;(session.user as { id: string }).id = user.id
+    async jwt({ token, user }) {
+      if (user) token.id = user.id
+      return token
+    },
+    async session({ session, token }: { session: Session; token: any }) {
+      if (session.user && token?.id) {
+        session.user.id = token.id
       }
       return session
     },
