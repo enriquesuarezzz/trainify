@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div
       className="relative flex h-[100vh] w-full items-center justify-center bg-cover bg-center text-white"
-      style={{ backgroundImage: "url('/images/gym-hero.jpg')" }}
+      style={{ backgroundImage: "url('/images/header.jpg')" }}
     >
       {/* Gradient overlay */}
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-orange-500/70 to-blue-600/70"></div>
@@ -25,8 +25,8 @@ const Header = () => {
           <button className="rounded bg-orange-500 px-6 py-2 font-semibold text-white shadow-md transition hover:bg-orange-600">
             ➤ Book a Class
           </button>
-          <button className="cursor-not-allowed rounded bg-white/80 px-6 py-2 font-semibold text-gray-800 shadow-md">
-            ⏳ View Schedule
+          <button className="rounded bg-white px-6 py-2 font-semibold text-orange-500 shadow-md hover:bg-white/80">
+            🗓️ View Schedule
           </button>
         </div>
 
