@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className="w-full border-b border-gray-200 bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <div className="text-2xl font-bold text-orange-500">FitFlow</div>
+        <div className="text-2xl font-bold text-orange-500">Trainify</div>
 
         {/* Center Links */}
         <div className="hidden space-x-6 text-sm font-medium text-gray-800 md:flex">
