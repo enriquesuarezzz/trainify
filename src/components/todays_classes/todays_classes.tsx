@@ -11,7 +11,7 @@ interface GymClass {
   endTime: string
   capacity: number
   reservations: { id: string }[]
-  imageUrl?: string // Optional: if you add images later
+  imageUrl?: string
 }
 
 const TodaysClasses = () => {
@@ -32,6 +32,33 @@ const TodaysClasses = () => {
   if (loading)
     return <p className="text-muted text-center">Loading classes...</p>
 
+  const handleBooking = async (classId: string) => {
+    try {
+      const res = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gymClassId: classId }),
+      })
+
+      if (!res.ok) throw new Error('Failed to book')
+
+      alert('Successfully booked!')
+      // Update local state to reflect new reservation
+      setClasses((prev) =>
+        prev.map((c) =>
+          c.id === classId
+            ? {
+                ...c,
+                reservations: [...c.reservations, { id: 'new' }],
+              }
+            : c,
+        ),
+      )
+    } catch (err) {
+      alert('You must be logged in to book a class.')
+    }
+  }
+
   return (
     <section className="container py-12">
       <div className="mb-10 text-center">
@@ -48,16 +75,23 @@ const TodaysClasses = () => {
         {classes.map((c) => (
           <div
             key={c.id}
-            className="bg-card shadow-card overflow-hidden rounded-xl transition hover:shadow-lg"
+            className="bg-card shadow-card flex flex-col items-center justify-between overflow-hidden rounded-xl border-gray-600 transition hover:shadow-lg"
           >
-            {/* Replace this with real imageUrl if you add it to DB */}
-            <div className="from-primary to-secondary h-48 bg-gradient-to-tr" />
+            {c.imageUrl ? (
+              <img
+                src={c.imageUrl}
+                alt={c.name}
+                className="h-48 w-full object-cover"
+              />
+            ) : (
+              <div className="from-primary to-secondary h-48 w-full bg-gradient-to-tr" />
+            )}
 
-            <div className="p-5">
+            <div className="flex flex-col items-center justify-center p-5">
               <h3 className="text-primary text-xl font-bold">{c.name}</h3>
               <p className="text-muted-foreground mt-1">{c.description}</p>
 
-              <div className="text-muted-foreground mt-4 flex items-center justify-between text-sm">
+              <div className="text-muted-foreground mt-4 flex items-center justify-between gap-4 text-sm">
                 <span className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
                   {new Date(c.startTime).toLocaleTimeString([], {
@@ -76,6 +110,17 @@ const TodaysClasses = () => {
                 </span>
               </div>
             </div>
+            <button
+              onClick={() => handleBooking(c.id)}
+              disabled={c.reservations.length >= c.capacity}
+              className={`mb-4 max-w-[200px] rounded px-6 py-2 font-semibold text-white shadow-md transition ${
+                c.reservations.length >= c.capacity
+                  ? 'cursor-not-allowed bg-gray-400'
+                  : 'bg-orange-500 hover:bg-orange-600'
+              }`}
+            >
+              {c.reservations.length >= c.capacity ? 'Full' : '➤ Book a Class'}
+            </button>
           </div>
         ))}
       </div>
