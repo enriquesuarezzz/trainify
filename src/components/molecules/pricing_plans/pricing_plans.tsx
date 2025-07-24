@@ -61,10 +61,10 @@ const PricingPlans = () => {
         {plans.map((plan, index) => (
           <div
             key={index}
-            className={`group relative flex flex-col rounded-xl border p-6 shadow-md transition duration-200 ${
+            className={`group relative flex transform flex-col rounded-xl border p-6 shadow-md transition-transform duration-300 ${
               plan.isPopular
-                ? 'z-10 scale-110 border-orange-500 bg-white'
-                : 'border-gray-200 bg-white'
+                ? 'z-10 scale-110 border-orange-500 bg-white hover:scale-[1.15]'
+                : 'scale-100 border-gray-200 bg-white hover:scale-105'
             } hover:bg-orange-50 hover:shadow-lg`}
           >
             {/* Most Popular Label */}

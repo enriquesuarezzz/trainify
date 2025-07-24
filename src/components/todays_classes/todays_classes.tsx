@@ -75,7 +75,7 @@ const TodaysClasses = () => {
         {classes.map((c) => (
           <div
             key={c.id}
-            className="bg-card shadow-card flex flex-col items-center justify-between overflow-hidden rounded-xl border-gray-600 transition hover:shadow-lg"
+            className="bg-card shadow-card flex flex-col items-center justify-between overflow-hidden rounded-xl border border-gray-200 transition hover:shadow-lg"
           >
             {c.imageUrl ? (
               <img
