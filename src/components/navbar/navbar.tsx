@@ -6,12 +6,15 @@ const Navbar = () => {
     <div className="w-full border-b border-gray-200 bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <div className="text-2xl font-bold text-orange-500">Trainify</div>
+        <Link href="/">
+          <div className="text-2xl font-bold text-orange-500">Trainify</div>
+        </Link>
 
         {/* Center Links */}
         <div className="hidden space-x-6 text-sm font-medium text-gray-800 md:flex">
-          <Link href="#">Classes</Link>
-          <Link href="#">Schedule</Link>
+          <Link href="classes">Classes</Link>
+          <Link href="pricing">Pricing</Link>
+          <Link href="contact">Contact</Link>
           <Link href="#">Profile</Link>
         </div>
 
