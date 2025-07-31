@@ -17,7 +17,7 @@ export default function LoginPage() {
     })
 
     if (res?.ok) {
-      router.push('/gym-classes')
+      router.push('/classes')
     } else {
       alert('Invalid credentials')
     }
