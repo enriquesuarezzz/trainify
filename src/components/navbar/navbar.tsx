@@ -15,13 +15,16 @@ const Navbar = () => {
           <Link href="classes">Classes</Link>
           <Link href="pricing">Pricing</Link>
           <Link href="contact">Contact</Link>
-          <Link href="#">Profile</Link>
+          <Link href="profile">Profile</Link>
         </div>
 
         {/* Icons */}
         <div className="flex space-x-4">
           <Bell className="h-5 w-5 cursor-pointer text-gray-800" />
-          <User className="h-5 w-5 cursor-pointer text-gray-800" />
+
+          <Link href="/login">
+            <User className="h-5 w-5 cursor-pointer text-gray-800" />
+          </Link>
         </div>
       </div>
     </div>
