@@ -49,7 +49,7 @@ const plans = [
 
 const PricingPlans = () => {
   return (
-    <section className="w-full text-center">
+    <section className="w-full pb-20 text-center">
       <h2 className="mb-2 text-3xl font-extrabold text-orange-500 md:text-4xl">
         Choose Your Plan
       </h2>
