@@ -61,7 +61,7 @@ export default function GymClassesPage() {
   if (status === 'loading') return <p className="text-center">Loading...</p>
 
   return (
-    <section className="container py-12">
+    <section className="mx-10 items-center justify-center py-12">
       <div className="mb-10 text-center">
         <h1 className="text-xl font-extrabold text-orange-500 md:text-2xl">
           Upcoming Gym Classes
