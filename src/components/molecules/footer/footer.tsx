@@ -2,7 +2,7 @@ import { Facebook, Instagram, Twitter } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="mt-20 border-t border-gray-200 py-10 text-gray-700">
+    <footer className="border-t border-gray-200 py-10 text-gray-700">
       <div className="container mx-auto grid grid-cols-1 items-center justify-center gap-8 text-center md:grid-cols-3">
         <div>
           <h3 className="text-center text-xl font-bold text-orange-500">
