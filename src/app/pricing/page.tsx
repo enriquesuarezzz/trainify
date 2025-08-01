@@ -50,7 +50,7 @@ const plans = [
 
 export default function PricingPage() {
   return (
-    <section className="container py-16 text-center">
+    <section className="w-full items-center justify-center py-16 text-center">
       <h2 className="mb-4 text-3xl font-extrabold text-orange-500 md:text-4xl">
         Choose Your Plan
       </h2>

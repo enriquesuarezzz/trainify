@@ -19,7 +19,7 @@ export default function ContactPage() {
   }
 
   return (
-    <section className="container py-16">
+    <section className="w-full items-center justify-center py-16">
       <div className="mb-10 text-center">
         <h1 className="text-3xl font-extrabold text-orange-500 md:text-4xl">
           Contact Us
@@ -29,52 +29,11 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="grid gap-12 md:grid-cols-2">
-        {/* Contact Info */}
-        <div className="space-y-6">
-          <div className="flex items-start gap-4">
-            <Phone className="mt-1 h-5 w-5 text-orange-500" />
-            <div>
-              <h4 className="font-semibold">Phone</h4>
-              <p className="text-gray-600">+1 (555) 123-4567</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <Mail className="mt-1 h-5 w-5 text-orange-500" />
-            <div>
-              <h4 className="font-semibold">Email</h4>
-              <p className="text-gray-600">support@fitstudio.com</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-4">
-            <MapPin className="mt-1 h-5 w-5 text-orange-500" />
-            <div>
-              <h4 className="font-semibold">Address</h4>
-              <p className="text-gray-600">123 Fitness Ave, Muscle City, NY</p>
-            </div>
-          </div>
-
-          {/* Social Links */}
-          <div className="mt-8">
-            <h4 className="mb-3 font-semibold">Follow Us</h4>
-            <div className="flex gap-4 text-gray-600">
-              <a href="#" className="hover:text-orange-500">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-orange-500">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="hover:text-orange-500">
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Form */}
+      <div className="flex flex-col items-center justify-center gap-12">
+        {/* Contact Form First */}
         <form
+          className="mb-10 w-full max-w-3/6 space-y-6 rounded-xl border p-6 shadow-sm"
           onSubmit={handleSubmit}
-          className="space-y-6 rounded-xl border p-6 shadow-sm"
         >
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -131,6 +90,31 @@ export default function ContactPage() {
             </p>
           )}
         </form>
+
+        {/* Contact Info Second */}
+        <div className="flex w-full items-center justify-center gap-12">
+          <div className="flex items-start gap-4">
+            <Phone className="mt-1 h-5 w-5 text-orange-500" />
+            <div>
+              <h4 className="font-semibold">Phone</h4>
+              <p className="text-gray-600">+1 (555) 123-4567</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4">
+            <Mail className="mt-1 h-5 w-5 text-orange-500" />
+            <div>
+              <h4 className="font-semibold">Email</h4>
+              <p className="text-gray-600">support@trainify.com</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4">
+            <MapPin className="mt-1 h-5 w-5 text-orange-500" />
+            <div>
+              <h4 className="font-semibold">Address</h4>
+              <p className="text-gray-600">123 Fitness Ave, Muscle City, NY</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
