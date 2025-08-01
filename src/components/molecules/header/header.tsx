@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div
       className="relative flex h-[100vh] w-full items-center justify-center bg-cover bg-center text-white"
-      style={{ backgroundImage: "url('/images/header.jpg')" }}
+      style={{ backgroundImage: "url('/images/header.avif')" }}
     >
       {/* Gradient overlay */}
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-orange-500/70 to-blue-600/70"></div>
