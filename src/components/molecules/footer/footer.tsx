@@ -62,7 +62,7 @@ const Footer = () => {
 
       {/* Bottom note */}
       <div className="mt-10 text-center text-xs text-gray-400">
-        © {new Date().getFullYear()} FitStudio. All rights reserved.
+        © {new Date().getFullYear()} Trainify. All rights reserved.
       </div>
     </footer>
   )
