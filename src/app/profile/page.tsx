@@ -9,6 +9,7 @@ interface Reservation {
   gymClass: {
     id: string
     name: string
+    image: string
     startTime: string
     endTime: string
   }
@@ -34,6 +35,25 @@ export default function ProfilePage() {
   if (status === 'loading') return <p className="text-center">Loading...</p>
   if (!session?.user)
     return <p className="text-center">You must be logged in.</p>
+
+  const handleCancel = async (reservationId: string) => {
+    const confirmCancel = confirm(
+      'Are you sure you want to cancel this reservation?',
+    )
+    if (!confirmCancel) return
+
+    const res = await fetch(`/api/reservations/${reservationId}`, {
+      method: 'DELETE',
+    })
+
+    const data = await res.json()
+
+    if (res.ok) {
+      setReservations((prev) => prev.filter((r) => r.id !== reservationId))
+    } else {
+      alert(data.error || 'Failed to cancel reservation.')
+    }
+  }
 
   return (
     <section className="container py-16">
@@ -76,11 +96,24 @@ export default function ProfilePage() {
                 key={r.id}
                 className="rounded border p-4 shadow-sm transition hover:shadow"
               >
+                {r.gymClass.image && (
+                  <img
+                    src={r.gymClass.image}
+                    alt={r.gymClass.name}
+                    className="h-20 w-20 rounded object-cover"
+                  />
+                )}
                 <p className="font-semibold">{r.gymClass.name}</p>
                 <p className="text-sm text-gray-600">
                   {new Date(r.gymClass.startTime).toLocaleString()} -{' '}
                   {new Date(r.gymClass.endTime).toLocaleString()}
                 </p>
+                <button
+                  onClick={() => handleCancel(r.id)}
+                  className="mt-2 rounded bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600"
+                >
+                  Cancel
+                </button>
               </li>
             ))}
           </ul>
