@@ -2,10 +2,10 @@ import prisma from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 
 export async function GET(
-  _: Request,
-  { params }: { params: { userId: string } },
+  req: Request,
+  context: { params: { userId: string } },
 ) {
-  const { userId } = params
+  const { userId } = context.params
 
   if (!userId) {
     return NextResponse.json({ error: 'Missing userId' }, { status: 400 })
