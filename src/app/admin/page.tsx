@@ -28,14 +28,23 @@ export default function AdminPage() {
 
   useEffect(() => {
     const fetchClasses = async () => {
-      const res = await fetch('/api/admin/classes')
+      const res = await fetch('/api/admin/classes', {
+        credentials: 'include',
+      })
+
       const data = await res.json()
-      setGymClasses(data)
+
+      if (Array.isArray(data)) {
+        setGymClasses(data)
+      } else {
+        setGymClasses([])
+        console.error('Unexpected API response:', data)
+      }
+
       setLoading(false)
     }
 
     fetchClasses()
-    console.log('gymClasses:', gymClasses)
   }, [])
 
   if (status === 'loading' || loading) {
