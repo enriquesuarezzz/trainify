@@ -13,11 +13,17 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async session({ session, user }) {
-      // Expose user.id and role in session
       if (session?.user) {
-        session.user.id = user.id
-        // If you have a role field in your User model
-        session.user.role = (user as any).role
+        // Ensure role is coming from DB
+        const dbUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          select: { id: true, role: true },
+        })
+
+        if (dbUser) {
+          session.user.id = dbUser.id
+          session.user.role = dbUser.role as 'user' | 'admin'
+        }
       }
       return session
     },
