@@ -15,37 +15,49 @@ interface GymClass {
 
 export default function AdminPage() {
   const { data: session, status } = useSession()
+  console.log('Session data:', session)
   const router = useRouter()
   const [gymClasses, setGymClasses] = useState<GymClass[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (status === 'loading') return
+    console.log('Session data:', session)
+    console.log('Status:', status)
+
+    // Redirect if not admin
     if (!session?.user || session.user.role !== 'admin') {
-      router.push('/') // Redirect if not admin
+      router.push('/')
+      return
     }
-  }, [session, status, router])
 
-  useEffect(() => {
+    // ✅ Only fetch after confirming admin
     const fetchClasses = async () => {
-      const res = await fetch('/api/admin/classes', {
-        credentials: 'include',
-      })
+      try {
+        const res = await fetch('/api/admin/classes', {
+          method: 'GET',
+          credentials: 'include', // send cookies
+        })
 
-      const data = await res.json()
+        if (!res.ok) {
+          const errorData = await res.json()
+          console.error('Unexpected API response:', errorData)
+          setGymClasses([])
+          return
+        }
 
-      if (Array.isArray(data)) {
-        setGymClasses(data)
-      } else {
+        const data = await res.json()
+        setGymClasses(Array.isArray(data) ? data : [])
+      } catch (err) {
+        console.error('Error fetching classes:', err)
         setGymClasses([])
-        console.error('Unexpected API response:', data)
+      } finally {
+        setLoading(false)
       }
-
-      setLoading(false)
     }
 
     fetchClasses()
-  }, [])
+  }, [session, status, router])
 
   if (status === 'loading' || loading) {
     return <p className="py-16 text-center">Loading...</p>
