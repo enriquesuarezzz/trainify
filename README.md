@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Trainify 🏋️‍♂️
+**Next.js + Tailwind CSS Ecommerce with Firebase and Stripe**
+**Next.js + NextAuth + Prisma Gym Class Management**
 
-First, run the development server:
+This is a secure admin dashboard built with Next.js that allows gym administrators to manage gym classes, featuring Google OAuth authentication with role-based access control via NextAuth and Prisma.
+
+## 🚀 Features
+
+- **Google OAuth Authentication** with NextAuth.js
+- **Role-based Access Control** — Admin and User roles supported
+- **Prisma Adapter** for seamless database integration
+- **JWT Session Strategy** including user roles in session tokens
+- **Protected Admin Pages** with client-side role checks
+- **Fetch and Display Gym Classes** for admins only
+
+## 📦 Tech Stack
+
+- **Frontend**: Next.js, React
+- **Authentication**: NextAuth.js with Google OAuth
+- **Database**: Prisma ORM with PostgreSQL (or any supported DB)
+- **Styling**: Tailwind CSS (optional, adjust as needed)
+
+---
+
+##  🔐 Authentication & Authorization
+Uses NextAuth.js with Google OAuth.
+
+Session strategy is JWT, enriched with user ID and role.
+
+Admin-only pages check session.user.role === 'admin'.
+
+Prisma stores user and session data.
+
+## 🛠️ Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/enriquesuarezzz/trainify.git
+cd trainify
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+
+- Add Firebase config to your `.env.local`:
+
+```bash
+DATABASE_URL="your_database_connection_string"
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+NEXTAUTH_SECRET="your-random-secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+### 4. Prisma Setup
+
+```bash
+npx prisma generate
+npx prisma migrate dev --name init
+
+```
+
+### 5. Set Up Nodemailer
+
+- Choose an SMTP provider (Gmail, SendGrid, etc.)
+- Install Nodemailer:
+
+```bash
+npm install nodemailer
+```
+
+- Add email configuration to `.env.local`:
+
+```bash
+BASE_URL=http://localhost:3000   # Update this in production
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password
+```
+
+### 6. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧠 Sample Prisma User Model
 
-## Learn More
+```
+model User {
+  id            String   @id @default(cuid())
+  name          String?
+  email         String   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String   @default("user")
+  sessions      Session[]
+  accounts      Account[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the **MIT License** — see the LICENSE file for more details.
