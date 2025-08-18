@@ -21,23 +21,28 @@ const Footer = () => {
           </h4>
           <ul className="flex flex-wrap justify-center gap-6 text-sm">
             <li className="list-none">
-              <a href="#" className="transition hover:text-orange-500">
+              <a href="/" className="hover:text-orange-500">
                 Home
               </a>
             </li>
             <li className="list-none">
-              <a href="#" className="transition hover:text-orange-500">
+              <a href="/classes" className="transition hover:text-orange-500">
                 Classes
               </a>
             </li>
             <li className="list-none">
-              <a href="#" className="transition hover:text-orange-500">
+              <a href="/pricing" className="transition hover:text-orange-500">
                 Pricing
               </a>
             </li>
             <li className="list-none">
-              <a href="#" className="transition hover:text-orange-500">
+              <a href="/contact" className="transition hover:text-orange-500">
                 Contact
+              </a>
+            </li>
+            <li className="list-none">
+              <a href="/profile" className="transition hover:text-orange-500">
+                Profile
               </a>
             </li>
           </ul>
@@ -47,13 +52,22 @@ const Footer = () => {
         <div>
           <h4 className="mb-3 text-center text-lg font-semibold">Follow Us</h4>
           <div className="flex justify-center gap-4">
-            <a href="#" className="transition hover:text-orange-500">
+            <a
+              href="https://www.facebook.com/"
+              className="transition-all hover:scale-110 hover:text-orange-500"
+            >
               <Facebook className="h-5 w-5" />
             </a>
-            <a href="#" className="transition hover:text-orange-500">
+            <a
+              href="https://www.instagram.com/"
+              className="transition-all hover:scale-110 hover:text-orange-500"
+            >
               <Instagram className="h-5 w-5" />
             </a>
-            <a href="#" className="transition hover:text-orange-500">
+            <a
+              href="https://x.com/?lang=es"
+              className="transition-all hover:scale-110 hover:text-orange-500"
+            >
               <Twitter className="h-5 w-5" />
             </a>
           </div>

@@ -16,26 +16,31 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // First login: fetch from DB
+      // On first login: fetch from DB
       if (user) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email! },
-          select: { id: true, role: true },
+          select: { id: true, role: true, membership: true },
         })
 
         if (dbUser) {
           token.id = dbUser.id
           token.role = dbUser.role
+          token.membership = dbUser.membership
         }
       }
 
-      // Subsequent requests: ensure token still has role
-      if (!token.role) {
+      //  make sure role & membership are still set
+      if (!token.role || !token.membership) {
         const dbUser = await prisma.user.findUnique({
           where: { id: token.id as string },
-          select: { role: true },
+          select: { role: true, membership: true },
         })
-        if (dbUser) token.role = dbUser.role
+
+        if (dbUser) {
+          token.role = dbUser.role
+          token.membership = dbUser.membership
+        }
       }
 
       return token
@@ -45,6 +50,10 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id as string
         session.user.role = token.role as string
+        session.user.membership = token.membership as
+          | 'BASIC'
+          | 'PREMIUM'
+          | 'ELITE'
       }
       return session
     },

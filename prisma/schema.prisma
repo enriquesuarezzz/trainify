@@ -12,9 +12,17 @@ model User {
   name         String
   email        String        @unique
   password     String        
-  role      String   @default("user") 
+  role         String        @default("user")   
+  membership   Membership    @default(BASIC)    
   reservations Reservation[]
 }
+
+enum Membership {
+  BASIC
+  PREMIUM
+  ELITE
+}
+
 
 model GymClass {
   id             String        @id @default(cuid())
