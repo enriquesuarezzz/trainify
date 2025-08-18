@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Header = () => {
@@ -23,10 +24,10 @@ const Header = () => {
 
         <div className="mt-6 flex flex-wrap justify-center gap-4">
           <button className="rounded bg-orange-500 px-6 py-2 font-semibold text-white shadow-md transition hover:bg-orange-600">
-            ➤ Book a Class
+            <Link href="/classes">➤ Book a Class</Link>
           </button>
           <button className="rounded bg-white px-6 py-2 font-semibold text-orange-500 shadow-md hover:bg-white/80">
-            🗓️ View Schedule
+            <Link href="/classes"> 🗓️ View Schedule</Link>
           </button>
         </div>
 
