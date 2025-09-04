@@ -5,7 +5,7 @@
 
 This is a secure admin dashboard built with Next.js that allows gym administrators to manage gym classes, featuring Google OAuth authentication with role-based access control via NextAuth and Prisma.
 
-## 🚀 Feaute
+## 🚀 Features 
 
 - **Google OAuth Authentication** with NextAuth.js
 - **Role-based Access Control** — Admin and User roles supported
